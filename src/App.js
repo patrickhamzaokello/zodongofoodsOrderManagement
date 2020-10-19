@@ -116,10 +116,7 @@ function App() {
   // };
 
   const cancelOrder = (selectedOrder) => {
-    database
-      .collection("OrderRecords")
-      .doc(selectedOrder.id)
-      .delete()
+    database.collection("OrderRecords").doc(selectedOrder.id).delete();
   };
 
   return (
@@ -145,7 +142,11 @@ function App() {
                 <p>Time: {moment(order.date).format("ddd DD/MM/YYYY LTS")}</p>
                 <span>Status:</span>
 
-                <span className={`banner ${order.status === "true" ? "active" : "cancel"}`}></span>
+                <span
+                  className={`banner ${
+                    order.status === "true" ? "active" : "cancel"
+                  }`}
+                ></span>
               </div>
             ))
           : null}
