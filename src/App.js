@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import database from "./firebase";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+import { ColorLensOutlined } from "@material-ui/icons";
 
 function App() {
   const [allOrders, setAllOrders] = useState([]);
@@ -10,6 +11,8 @@ function App() {
   const [errors, setError] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
   const [loading, setLoading] = useState();
+
+  const [orderstotal, setOrdersTotal] = useState();
 
   useEffect(() => {
     //this is where the code runs
@@ -25,6 +28,7 @@ function App() {
         fetchedOrders.push(fetchedOrder);
       });
       setAllOrders(fetchedOrders);
+      setOrdersTotal(fetchedOrders.length);
       setLoading(false);
     });
   }, []);
@@ -66,15 +70,32 @@ function App() {
         };
         fetchedUserDetails.push(fetcheduserDetail);
         setUserDetails(fetchedUserDetails);
-        console.log(fetchedUserDetails);
         setLoading(false);
       });
   };
 
+  const confirmOrder = (selectedOrder) => {
+    database
+      .collection("OrderRecords")
+      .doc(selectedOrder.id)
+      .update({ status: "true" });
+  };
+
+  const cancelOrder = (selectedOrder) => {
+    database
+      .collection("OrderRecords")
+      .doc(selectedOrder.id)
+      .update({ status: "false" });
+  };
+
   return (
     <main>
+      <div class="header">
+        <h1>Zodongo Foods</h1>
+      </div>
       <div className="OrderList">
-        <h1>AllOrders</h1>
+        <h1>ORDERS</h1>
+
 
         {allOrders
           ? allOrders.map((order) => (
@@ -83,18 +104,39 @@ function App() {
                 key={order.date}
                 onClick={() => selectOrder(order)}
               >
-                <p>{order.date}<span>| Status:
-                {order.status}</span></p>
+                <p>Order: {order.date}</p>
+                <span>
+                  | Status:
+                  {order.status}
+                </span>
+
+                <span
+                  className={`banner ${order.status == "true" ? "active" : ""}`}
+                ></span>
               </div>
             ))
           : null}
       </div>
 
       <div className="viewside">
-        {loading ? <p>Loading..</p> : null}
+        {loading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : null}
 
         {selectedOrder ? (
           <div>
+            <div className="actionbuttons">
+              <p
+                className="confirmbtn"
+                onClick={() => confirmOrder(selectedOrder)}
+              >
+                Confirm Order
+              </p>
+              <p
+                className="cancelorder"
+                onClick={() => cancelOrder(selectedOrder)}
+              >
+                Cancel Order
+              </p>
+            </div>
             <div className="userDetails">
               {userDetails.map((user) => (
                 <div className="user" key={user.id}>
@@ -128,11 +170,23 @@ function App() {
               </table>
             </div>
           </div>
-        ) : 
-        
-        <img src="https://image.freepik.com/free-psd/web-banner-template-japanese-restaurant_23-2148203260.jpg" alt="image"/>
-        
-        }
+        ) : (
+          <div>
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/zodongo-foods.appspot.com/o/Custom%20Size%20%E2%80%93%201.png?alt=media&token=31e7c76a-afe9-4fc5-a9b8-ee0b3ed8f671"
+              alt="image"
+            />
+
+            <div className="cardbody">
+              <h1>Welcome Back!</h1>
+
+              <p>Manage All Orders in one place. All Orders are Delievered in Real Time and so There is no need to refresh the browser</p>
+              <p></p>
+          
+            </div>
+
+          </div>
+        )}
       </div>
     </main>
   );

@@ -1,16 +1,36 @@
 .OrderList {
-  background-color: rgb(8, 6, 27);
+  /* background-color: rgb(8, 6, 27); */
   padding: 20px;
   overflow: auto;
-  height: 100vh;
+  height: 90vh;
   width: 40vw;
   left: 0;
   position: fixed;
 }
 
-h1 {
-    color: lightgray;
+   
+
+.banner::after {
+    color: yellow;
+    background:#4caf50;
+    padding:5px;
+    border-radius: 5px;
+    content: "New order";
+  }
+
+  
+
+.active::after {
+    font-weight: bold;
+    color: red;
+    background: #fdceff;
+    padding:5px;
+    border-radius: 5px;
+    content: "Confirmed ";
 }
+
+
+
 
 p {
   margin-top: 0;
@@ -39,15 +59,17 @@ p {
 }
 
 .Order {
-  background-color: rgb(14, 2, 32);
-  color: white;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid gray;
+ padding: 1em;
+ border-radius: .3em;
+ box-shadow: 10px 10px 30px rgb(0, 0, 0,0.1);
+ margin-bottom: 10px;
 }
 
 .Order:hover {
   cursor: pointer;
+  border: 1px solid #666;
+  animation-duration: 2s;
+  transition-duration: 2s;
 }
 
 .tablewrapper {
@@ -58,5 +80,114 @@ p {
 
 main {
   width: 100vw;
-  display: flex;
+  /* display: flex; */
+}
+
+
+.actionbuttons{
+    display: flex;
+}
+
+.confirmbtn{
+    padding: 1em;
+    background: #14eb14;
+    border-radius: .3em;
+    box-shadow: 10px 10px 30px rgb(0, 0, 0,0.1);
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+}
+
+.confirmbtn:hover{
+cursor: pointer;
+border: 1px solid #ffc107;
+background: #fff;
+}
+
+.cancelorder:hover{
+    cursor: pointer;
+border: 1px solid #000;
+background: #fff;
+}
+
+.cancelorder{
+    padding: 1em;
+    border-radius: .3em;
+    box-shadow: 10px 10px 30px rgb(0, 0, 0,0.1);
+    margin-bottom: 10px;
+}
+
+.header{
+    background: #202020;
+    width: 100vw;
+    padding: 0.8em;
+    color: white;
+}
+
+
+
+h1 {
+    color: #ff562a;
+}
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:rgb(204, 58, 0);
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:22px;
+}
+
+.cardbody {
+  margin: 10px 0;
+}
+
+.cardbody h1{
+  color: rgb(233, 0, 0);
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid rgb(228, 0, 30);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: rgb(228, 0, 38) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
