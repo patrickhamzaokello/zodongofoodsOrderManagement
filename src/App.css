@@ -8,29 +8,38 @@
   position: fixed;
 }
 
-   
-
 .banner::after {
-    color: yellow;
-    background:#4caf50;
-    padding:5px;
-    border-radius: 5px;
-    content: "New order";
-  }
-
-  
-
-.active::after {
-    font-weight: bold;
-    color: red;
-    background: #fdceff;
-    padding:5px;
-    border-radius: 5px;
-    content: "Confirmed ";
+  color: yellow;
+  background: #4caf50;
+  padding: 5px;
+  border-radius: 5px;
+  content: "New order";
+  font-size: 13px;
+  margin-left: 10px;
 }
 
+.active::after {
+  font-weight: bold;
+  color: red;
+  background: #fdceff;
+  padding: 5px;
+  border-radius: 5px;
+  content: "Confirmed ";
+  font-size: 13px;
+  margin-left: 10px;
+}
 
+/* .cancel::after {
+  font-weight: bold;
+    color: rgb(255, 208, 0);
+    background: #ca0303;
+    padding:5px;
+    border-radius: 5px;
+    content: "Canceled ";
+    font-size: 13px;
+    margin-left: 10px;
 
+} */
 
 p {
   margin-top: 0;
@@ -59,10 +68,10 @@ p {
 }
 
 .Order {
- padding: 1em;
- border-radius: .3em;
- box-shadow: 10px 10px 30px rgb(0, 0, 0,0.1);
- margin-bottom: 10px;
+  padding: 1em;
+  border-radius: 0.3em;
+  box-shadow: 10px 10px 30px rgb(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 }
 
 .Order:hover {
@@ -83,53 +92,52 @@ main {
   /* display: flex; */
 }
 
-
-.actionbuttons{
-    display: flex;
+.actionbuttons {
+  display: flex;
 }
 
-.confirmbtn{
-    padding: 1em;
-    background: #fff300;
-    border-radius: .3em;
-    box-shadow: 10px 10px 30px rgb(0, 0, 0,0.1);
-    margin-bottom: 10px;
-    margin-right: 10px;
-    color: black;
-    font-weight: bold;
-
+.confirmbtn {
+  padding: 1em;
+  background: #fff300;
+  border-radius: 0.3em;
+  box-shadow: 10px 10px 30px rgb(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  margin-right: 10px;
+  color: black;
+  font-weight: bold;
 }
 
-.confirmbtn:hover{
-cursor: pointer;
-border: 3px solid #ffc107;
-background: #fff;
+.confirmbtn:hover {
+  cursor: pointer;
+  border: 3px solid #ffc107;
+  background: #fff;
 }
 
-.cancelorder:hover{
-    cursor: pointer;
-border: 1px solid #000;
-background: #fff;
+.cancelorder:hover {
+  cursor: pointer;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
 }
 
-.cancelorder{
-    padding: 1em;
-    border-radius: .3em;
-    box-shadow: 10px 10px 30px rgb(0, 0, 0,0.1);
-    margin-bottom: 10px;
+.cancelorder {
+  padding: 1em;
+  border-radius: 0.3em;
+  background-color: red;
+  box-shadow: 10px 10px 30px rgb(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  color: white;
 }
 
-.header{
-    background: #202020;
-    width: 100vw;
-    padding: 0.8em;
-    color: white;
+.header {
+  background: #202020;
+  width: 100vw;
+  padding: 0.8em;
+  color: white;
 }
 
-
-.neworderscount{
-
-  background-color: rgb(1, 83, 38);
+.neworderscount {
+  background-color: #f44336;
   padding: 10px;
   border-radius: 50%;
   width: 50px;
@@ -137,7 +145,6 @@ background: #fff;
   height: 50px;
   text-align: center;
   color: white;
-
 }
 
 .Orderheading {
@@ -147,34 +154,33 @@ background: #fff;
   margin-bottom: 10px;
 }
 
-
 h1 {
-    color: #fdceff;
-    font-size: 20px;
+  color: #fdceff;
+  font-size: 20px;
 }
 
-.float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:rgb(204, 58, 0);
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: rgb(204, 58, 0);
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
 }
 
-.my-float{
-	margin-top:22px;
+.my-float {
+  margin-top: 22px;
 }
 
 .cardbody {
   margin: 10px 0;
 }
 
-.cardbody h1{
+.cardbody h1 {
   color: rgb(233, 0, 0);
 }
 

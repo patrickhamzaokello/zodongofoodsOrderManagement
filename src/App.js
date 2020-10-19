@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import database from "./firebase";
+import moment from "moment";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import zondongoImage from "./zodongo.png";
@@ -17,6 +18,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
+    console.log();
     database
       .collection("OrderRecords")
       .orderBy("status")
@@ -106,11 +108,18 @@ function App() {
       .update({ status: "true" });
   };
 
+  // const cancelOrder = (selectedOrder) => {
+  //   database
+  //     .collection("OrderRecords")
+  //     .doc(selectedOrder.id)
+  //     .update({ status: "false" });
+  // };
+
   const cancelOrder = (selectedOrder) => {
     database
       .collection("OrderRecords")
       .doc(selectedOrder.id)
-      .update({ status: "false" });
+      .delete()
   };
 
   return (
@@ -132,18 +141,11 @@ function App() {
                 key={order.date}
                 onClick={() => selectOrder(order)}
               >
-                <p>Order: {order.date}</p>
-          <p>{Date.parse(order.date)}</p>
-                <span>
-                  | Status:
-                  {order.status}
-                </span>
+                <p>Order# : {order.date}</p>
+                <p>Time: {moment(order.date).format("ddd DD/MM/YYYY LTS")}</p>
+                <span>Status:</span>
 
-                <span
-                  className={`banner ${
-                    order.status === "true" ? "active" : ""
-                  }`}
-                ></span>
+                <span className={`banner ${order.status === "true" ? "active" : "cancel"}`}></span>
               </div>
             ))
           : null}
@@ -172,7 +174,7 @@ function App() {
                 className="cancelorder"
                 onClick={() => cancelOrder(selectedOrder)}
               >
-                Cancel Order
+                Delete Order
               </p>
             </div>
             <div className="userDetails">
