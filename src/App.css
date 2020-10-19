@@ -49,7 +49,7 @@ p {
 }
 
 .userDetails {
-  background: lightgreen;
+  background: #b4e7eb;
   padding: 20px;
 }
 
@@ -90,17 +90,19 @@ main {
 
 .confirmbtn{
     padding: 1em;
-    background: #14eb14;
+    background: #fff300;
     border-radius: .3em;
     box-shadow: 10px 10px 30px rgb(0, 0, 0,0.1);
     margin-bottom: 10px;
     margin-right: 10px;
+    color: black;
+    font-weight: bold;
 
 }
 
 .confirmbtn:hover{
 cursor: pointer;
-border: 1px solid #ffc107;
+border: 3px solid #ffc107;
 background: #fff;
 }
 
@@ -125,9 +127,30 @@ background: #fff;
 }
 
 
+.neworderscount{
+
+  background-color: rgb(1, 83, 38);
+  padding: 10px;
+  border-radius: 50%;
+  width: 50px;
+  font-size: 20px;
+  height: 50px;
+  text-align: center;
+  color: white;
+
+}
+
+.Orderheading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 
 h1 {
-    color: #ff562a;
+    color: #fdceff;
+    font-size: 20px;
 }
 
 .float{
@@ -152,6 +175,11 @@ h1 {
 }
 
 .cardbody h1{
+  color: rgb(233, 0, 0);
+}
+
+.OrderList h1 {
+  font-size: 20px;
   color: rgb(233, 0, 0);
 }
 

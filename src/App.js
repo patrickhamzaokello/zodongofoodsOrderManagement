@@ -2,36 +2,61 @@ import React, { useState, useEffect } from "react";
 import database from "./firebase";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import { ColorLensOutlined } from "@material-ui/icons";
+import zondongoImage from "./zodongo.png";
 
 function App() {
   const [allOrders, setAllOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState();
   const [userorders, setUserOrders] = useState([]);
-  const [errors, setError] = useState([]);
+  // const [errors, setError] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
   const [loading, setLoading] = useState();
 
   const [orderstotal, setOrdersTotal] = useState();
+  const [newOrderTotal, setNewOrdersTotal] = useState();
 
   useEffect(() => {
-    //this is where the code runs
     setLoading(true);
-    database.collection("OrderRecords").onSnapshot((snapshot) => {
-      const fetchedOrders = [];
-      snapshot.docs.map((doc) => {
-        //get that document id and save it with the data
-        const fetchedOrder = {
-          id: doc.id,
-          ...doc.data(),
-        };
-        fetchedOrders.push(fetchedOrder);
+    database
+      .collection("OrderRecords")
+      .orderBy("status")
+      .onSnapshot((snapshot) => {
+        const fetchedOrders = [];
+        snapshot.docs.map((doc) => {
+          //get that document id and save it with the data
+          const fetchedOrder = {
+            id: doc.id,
+            ...doc.data(),
+          };
+          fetchedOrders.push(fetchedOrder);
+        });
+        setAllOrders(fetchedOrders);
+        setOrdersTotal(fetchedOrders.length);
+        newOrders();
+        setLoading(false);
       });
-      setAllOrders(fetchedOrders);
-      setOrdersTotal(fetchedOrders.length);
-      setLoading(false);
-    });
   }, []);
+
+  const newOrders = () => {
+    setLoading(true);
+    database
+      .collection("OrderRecords")
+      .where("status", "==", "false")
+      .orderBy("date", "desc")
+      .onSnapshot((snapshot) => {
+        const fetchedOrders = [];
+        snapshot.docs.map((doc) => {
+          //get that document id and save it with the data
+          const fetchedOrder = {
+            id: doc.id,
+            ...doc.data(),
+          };
+          fetchedOrders.push(fetchedOrder);
+        });
+        setNewOrdersTotal(fetchedOrders.length);
+        setLoading(false);
+      });
+  };
 
   const selectOrder = (order) => {
     setLoading(true);
@@ -90,12 +115,15 @@ function App() {
 
   return (
     <main>
-      <div class="header">
-        <h1>Zodongo Foods</h1>
+      <div className="header">
+        <h1>Zodongo Foods, Order Management </h1>
       </div>
       <div className="OrderList">
-        <h1>ORDERS</h1>
+        <div className="Orderheading">
+          <h1>ORDERS</h1>
 
+          <div className="neworderscount">{newOrderTotal}</div>
+        </div>
 
         {allOrders
           ? allOrders.map((order) => (
@@ -105,13 +133,16 @@ function App() {
                 onClick={() => selectOrder(order)}
               >
                 <p>Order: {order.date}</p>
+          <p>{Date.parse(order.date)}</p>
                 <span>
                   | Status:
                   {order.status}
                 </span>
 
                 <span
-                  className={`banner ${order.status == "true" ? "active" : ""}`}
+                  className={`banner ${
+                    order.status === "true" ? "active" : ""
+                  }`}
                 ></span>
               </div>
             ))
@@ -119,7 +150,14 @@ function App() {
       </div>
 
       <div className="viewside">
-        {loading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : null}
+        {loading ? (
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        ) : null}
 
         {selectedOrder ? (
           <div>
@@ -172,19 +210,17 @@ function App() {
           </div>
         ) : (
           <div>
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/zodongo-foods.appspot.com/o/Custom%20Size%20%E2%80%93%201.png?alt=media&token=31e7c76a-afe9-4fc5-a9b8-ee0b3ed8f671"
-              alt="image"
-            />
+            <img src={zondongoImage} alt="image" />
 
             <div className="cardbody">
-              <h1>Welcome Back!</h1>
+              <h1>Welcome, Zodongo!</h1>
 
-              <p>Manage All Orders in one place. All Orders are Delievered in Real Time and so There is no need to refresh the browser</p>
+              <p>
+                Manage All Orders in one place. All Orders are Delievered in
+                Real Time and so There is no need to refresh the browser
+              </p>
               <p></p>
-          
             </div>
-
           </div>
         )}
       </div>
