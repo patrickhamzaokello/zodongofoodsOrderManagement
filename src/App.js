@@ -86,7 +86,7 @@ function App() {
   const getUSerDetails = (order) => {
     setLoading(true);
     database
-      .collection("brews")
+      .collection("ZodongoUsers")
       .doc(order.userid)
       .onSnapshot((snapshot) => {
         const fetchedUserDetails = [];
@@ -108,16 +108,13 @@ function App() {
       .update({ status: "true" });
   };
 
-  // const cancelOrder = (selectedOrder) => {
-  //   database
-  //     .collection("OrderRecords")
-  //     .doc(selectedOrder.id)
-  //     .update({ status: "false" });
-  // };
-
   const cancelOrder = (selectedOrder) => {
-    database.collection("OrderRecords").doc(selectedOrder.id).delete();
+    database
+      .collection("OrderRecords")
+      .doc(selectedOrder.id)
+      .update({ status: "false" });
   };
+
 
   return (
     <main>
@@ -175,7 +172,7 @@ function App() {
                 className="cancelorder"
                 onClick={() => cancelOrder(selectedOrder)}
               >
-                Delete Order
+                Cancel Order
               </p>
             </div>
             <div className="userDetails">
